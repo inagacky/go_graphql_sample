@@ -7,16 +7,22 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type UserRepositoryImpl struct {
-	users []*user.User
+type UserRepository interface {
+	Save(user *user.User) (*user.User, error)
+	FindById(userId int) (*user.User, error)
+	FindUserList() ([]*user.User, error)
+}
+
+type userRepository struct {
 }
 
 func NewUserRepository() UserRepository {
-	return &UserRepositoryImpl{[]*user.User{}}
+	return &userRepository{
+	}
 }
 
-
-func (u *UserRepositoryImpl) Save(user *user.User) (*user.User, error) {
+// ユーザー作成
+func (u *userRepository) Save(user *user.User) (*user.User, error) {
 
 	db := db.GetDB()
 	if err := db.Create(&user).Error; err != nil {
@@ -27,7 +33,8 @@ func (u *UserRepositoryImpl) Save(user *user.User) (*user.User, error) {
 	return user, nil
 }
 
-func (u *UserRepositoryImpl) FindById(id int) (*user.User, error) {
+// IDを元にユーザー取得
+func (u *userRepository) FindById(id int) (*user.User, error) {
 
 	var user = user.User{}
 	user.Id = id
@@ -45,7 +52,8 @@ func (u *UserRepositoryImpl) FindById(id int) (*user.User, error) {
 	return &user, nil
 }
 
-func (u *UserRepositoryImpl) FindUserList() ([]*user.User, error) {
+// ユーザー一覧取得
+func (u *userRepository) FindUserList() ([]*user.User, error) {
 
 	// 構造体のインスタンス化
 	userList := []*user.User{}

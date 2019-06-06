@@ -9,3 +9,13 @@ func FindUserById(userId int) (*user.User, error) {
 	repository := userRepo.NewUserRepository()
 	return repository.FindById(userId)
 }
+
+func Save(newUser *user.User) (*user.User, error) {
+
+	return userRepo.NewUserRepository().Save(newUser)
+}
+
+func FindUserList() ([]*user.User, error) {
+
+	return userRepo.NewUserRepository().FindUserList()
+}
