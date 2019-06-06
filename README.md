@@ -76,5 +76,82 @@ Dockerコンテナで起動します。
     ]
   }
 }
+```
+
+#### タスク作成
+
+```
+% curl -X POST -d 'mutation { createTask(userId: 1, title: "testTitle" content: "testContent" ){ id, userId, title, content } }' http://localhost:8080/graphql | jq .
+{
+  "data": {
+    "createTask": {
+      "content": "testContent",
+      "id": 7,
+      "title": "testTitle",
+      "userId": 1
+    }
+  }
+}
+
+```
+
+#### タスク取得
+```
+% curl -X POST -d 'query { task(id:7) {id, userId, title, content} }' http://localhost:8080/graphql | jq .
+{
+  "data": {
+    "task": {
+      "content": "testContent",
+      "id": 7,
+      "title": "testTitle",
+      "userId": 1
+    }
+  }
+}
+```
+#### タスク一覧取得
+```
+% curl -X POST -d 'query { taskList{ id, userId, title, content } }' http://localhost:8080/graphql | jq .
+{
+  "data": {
+    "taskList": [
+      {
+        "content": "testContent",
+        "id": 2,
+        "title": "testTitle",
+        "userId": 1
+      },
+      ...
+      {
+        "content": "testContent",
+        "id": 7,
+        "title": "testTitle",
+        "userId": 1
+      }
+    ]
+  }
+}
+
+```
+
+#### タスクとユーザーを一緒に取得
+```
+% curl -X POST -d 'query { user(id:1) {id, firstName, lastName, email}, task(id:2) {id, userId, title, content} }' http://localhost:8080/graphql | jq .
+{
+  "data": {
+    "task": {
+      "content": "testContent",
+      "id": 2,
+      "title": "testTitle",
+      "userId": 1
+    },
+    "user": {
+      "email": "test@test.co.jp",
+      "firstName": "test",
+      "id": "1",
+      "lastName": "hoge"
+    }
+  }
+}
 
 ```
