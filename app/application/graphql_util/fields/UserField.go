@@ -6,7 +6,7 @@ import (
 	"github.com/inagacky/go_graphql_sample/app/application/graphql_util/types"
 	"github.com/inagacky/go_graphql_sample/app/domain/model/user"
 	"github.com/inagacky/go_graphql_sample/app/domain/service"
-	"github.com/inagacky/go_graphql_sample/app/infrastructure"
+	userRepo "github.com/inagacky/go_graphql_sample/app/infrastructure/user"
 )
 
 // fetch single user
@@ -15,11 +15,11 @@ var UserField = &graphql.Field {
 	Description: "Get single user",
 	Args: graphql.FieldConfigArgument {
 		"id": &graphql.ArgumentConfig {
-			Type: graphql.String,
+			Type: graphql.Int,
 		},
 	},
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-		userId, isOK := params.Args["id"].(string)
+		userId, isOK := params.Args["id"].(int)
 		if isOK {
 			return service.FindUserById(userId)
 		}
@@ -33,7 +33,10 @@ var UserListField = &graphql.Field {
 	Type:        graphql.NewList(types.UserType),
 	Description: "List of users",
 	Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-		return infrastructure.NewUserRepository().UserList(), nil
+
+		userList, _ := userRepo.NewUserRepository().FindUserList()
+
+		return userList, nil
 	},
 }
 
@@ -42,7 +45,10 @@ var CreateUserField = &graphql.Field {
 	Type:        types.UserType,
 	Description: "Create User",
 	Args: graphql.FieldConfigArgument {
-		"name": &graphql.ArgumentConfig{
+		"firstName": &graphql.ArgumentConfig{
+			Type: graphql.NewNonNull(graphql.String),
+		},
+		"lastName": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.String),
 		},
 		"email": &graphql.ArgumentConfig {
@@ -50,14 +56,16 @@ var CreateUserField = &graphql.Field {
 		},
 	},
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-		userName, _ := params.Args["name"].(string)
+		firstName, _ := params.Args["firstName"].(string)
+		lastName, _ := params.Args["lastName"].(string)
 		email, _ := params.Args["email"].(string)
 
-		newUser, err := user.NewUser(userName, email)
+		newUser, err := user.NewUser(firstName, lastName, email)
 		if err != nil {
 			panic(err)
 		}
-		infrastructure.NewUserRepository().Store(newUser)
+
+		userRepo.NewUserRepository().Save(newUser)
 		return newUser, nil
 	},
 }

@@ -4,12 +4,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/graphql-go/graphql"
+	"github.com/inagacky/go_graphql_sample/app/application/db"
 	"github.com/inagacky/go_graphql_sample/app/application/graphql_util"
 	"io/ioutil"
 	"net/http"
 )
 
 func main() {
+
+	// DB接続
+	db.Init()
+
 	// graphqlの受付
 	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()

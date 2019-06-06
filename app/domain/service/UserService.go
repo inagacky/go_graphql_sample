@@ -2,10 +2,10 @@ package service
 
 import (
 	"github.com/inagacky/go_graphql_sample/app/domain/model/user"
-	"github.com/inagacky/go_graphql_sample/app/infrastructure"
+	userRepo "github.com/inagacky/go_graphql_sample/app/infrastructure/user"
 )
 
-func FindUserById(userId string) (*user.User, error) {
-	repository := infrastructure.NewUserRepository()
+func FindUserById(userId int) (*user.User, error) {
+	repository := userRepo.NewUserRepository()
 	return repository.FindById(userId)
 }

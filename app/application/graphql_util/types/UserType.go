@@ -10,7 +10,10 @@ var UserType = graphql.NewObject(graphql.ObjectConfig{
 		"id": &graphql.Field{
 			Type: graphql.String,
 		},
-		"name": &graphql.Field{
+		"firstName": &graphql.Field{
+			Type: graphql.String,
+		},
+		"lastName": &graphql.Field{
 			Type: graphql.String,
 		},
 		"email": &graphql.Field{
@@ -25,7 +28,10 @@ var UserInput = graphql.NewInputObject(graphql.InputObjectConfig{
 		"id": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
-		"name": &graphql.InputObjectFieldConfig{
+		"firstName": &graphql.InputObjectFieldConfig{
+			Type: graphql.String,
+		},
+		"lastName": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
 		"email": &graphql.InputObjectFieldConfig{

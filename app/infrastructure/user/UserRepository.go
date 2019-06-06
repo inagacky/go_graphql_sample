@@ -5,7 +5,7 @@ import (
 )
 
 type UserRepository interface {
-	Store(user *user.User) UserRepository
-	FindById(userId string) (*user.User, error)
-	UserList() []*user.User
+	Save(user *user.User) (*user.User, error)
+	FindById(userId int) (*user.User, error)
+	FindUserList() ([]*user.User, error)
 }

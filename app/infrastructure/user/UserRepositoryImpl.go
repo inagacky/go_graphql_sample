@@ -1,34 +1,61 @@
 package user
 
 import (
-	"errors"
+	"fmt"
+	"github.com/inagacky/go_graphql_sample/app/application/db"
 	"github.com/inagacky/go_graphql_sample/app/domain/model/user"
+	"github.com/jinzhu/gorm"
 )
 
 type UserRepositoryImpl struct {
 	users []*user.User
 }
 
-func NewUserRepositoryImpl() UserRepository {
+func NewUserRepository() UserRepository {
 	return &UserRepositoryImpl{[]*user.User{}}
 }
 
-// store event to repository
-func (u *UserRepositoryImpl) Store(user *user.User) UserRepository {
-	u.users = append(u.users, user)
-	return u
+
+func (u *UserRepositoryImpl) Save(user *user.User) (*user.User, error) {
+
+	db := db.GetDB()
+	if err := db.Create(&user).Error; err != nil {
+		fmt.Printf("User Save Error: %v", err.Error())
+		return nil, err
+	}
+
+	return user, nil
 }
 
-func (u *UserRepositoryImpl) FindById(id string) (*user.User, error) {
-	for _, val := range u.users {
-		if val.Id == id {
-			return val, nil
+func (u *UserRepositoryImpl) FindById(id int) (*user.User, error) {
+
+	var user = user.User{}
+	user.Id = id
+	db := db.GetDB()
+	if err := db.First(&user).Error; err != nil {
+		if err != gorm.ErrRecordNotFound {
+			fmt.Printf("FindById User errors: %v", err.Error())
+			return nil, err
+		} else {
+			fmt.Printf("FindById User Notfound ID: %v", id)
+			return nil, nil
 		}
 	}
 
-	return nil, errors.New("user not found")
+	return &user, nil
 }
 
-func (u *UserRepositoryImpl) UserList() []*user.User {
-	return u.users
+func (u *UserRepositoryImpl) FindUserList() ([]*user.User, error) {
+
+	// 構造体のインスタンス化
+	userList := []*user.User{}
+	db := db.GetDB()
+	if err := db.Find(&userList).Error; err != nil {
+		if err != gorm.ErrRecordNotFound {
+			fmt.Printf("FindUserList User errors: %v", err.Error())
+			return nil, err
+		}
+	}
+
+	return userList, nil
 }

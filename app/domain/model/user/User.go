@@ -2,32 +2,36 @@ package user
 
 import (
 	"errors"
-	"github.com/google/uuid"
 )
 
 type User struct {
-	Id          string `json:"userId"`
-	Name        string `json:"name"`
+	Id          int `json:"id"`
+	FirstName   string `json:"first_name"`
+	LastName    string `json:"last_name"`
 	Email       string `json:"email"`
 }
 
 // constructor
 func NewUser(
-	name string,
+	firstName string,
+	lastName string,
 	email string) (*User, error) {
 
 	// validate
-	if name == "" {
-		return &User{"", "", ""}, errors.New("name is empty")
+	if firstName == "" {
+		return &User{0, "", "", ""}, errors.New("first_name is empty")
+	}
+	if lastName == "" {
+		return &User{0, "", "", ""}, errors.New("last_name is empty")
 	}
 	if email == "" {
-		return &User{"", "", ""}, errors.New("email is empty")
+		return &User{0, "", "", ""}, errors.New("email is empty")
 	}
 
 	return &User{
-		Id:   uuid.New().String(),
-		Name:     name,
-		Email:    email,
+		FirstName: firstName,
+		LastName:  lastName,
+		Email:     email,
 	}, nil
 }
 
