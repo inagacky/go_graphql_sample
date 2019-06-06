@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/graphql-go/graphql"
-	"github.com/inagacky/go_graphql_sample/application/graphql_util"
+	"github.com/inagacky/go_graphql_sample/app/application/graphql_util"
 	"io/ioutil"
 	"net/http"
 )

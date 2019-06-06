@@ -2,7 +2,7 @@ package graphql_util
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/inagacky/go_graphql_sample/application/graphql_util/fields"
+	"github.com/inagacky/go_graphql_sample/app/application/graphql_util/fields"
 )
 
 var query = graphql.NewObject(graphql.ObjectConfig{

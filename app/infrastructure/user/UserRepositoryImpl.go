@@ -2,7 +2,7 @@ package user
 
 import (
 	"errors"
-	"github.com/inagacky/go_graphql_sample/domain/model/user"
+	"github.com/inagacky/go_graphql_sample/app/domain/model/user"
 )
 
 type UserRepositoryImpl struct {

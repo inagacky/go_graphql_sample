@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/inagacky/go_graphql_sample/domain/model/user"
-	"github.com/inagacky/go_graphql_sample/infrastructure"
+	"github.com/inagacky/go_graphql_sample/app/domain/model/user"
+	"github.com/inagacky/go_graphql_sample/app/infrastructure"
 )
 
 func FindUserById(userId string) (*user.User, error) {

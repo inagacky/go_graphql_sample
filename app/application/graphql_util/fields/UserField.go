@@ -3,10 +3,10 @@ package fields
 import (
 	"errors"
 	"github.com/graphql-go/graphql"
-	"github.com/inagacky/go_graphql_sample/application/graphql_util/types"
-	"github.com/inagacky/go_graphql_sample/domain/model/user"
-	"github.com/inagacky/go_graphql_sample/domain/service"
-	"github.com/inagacky/go_graphql_sample/infrastructure"
+	"github.com/inagacky/go_graphql_sample/app/application/graphql_util/types"
+	"github.com/inagacky/go_graphql_sample/app/domain/model/user"
+	"github.com/inagacky/go_graphql_sample/app/domain/service"
+	"github.com/inagacky/go_graphql_sample/app/infrastructure"
 )
 
 // fetch single user
