@@ -27,7 +27,7 @@ func NewUser(
 	return &User{
 		Id:   uuid.New().String(),
 		Name:     name,
-		Email:    email
+		Email:    email,
 	}, nil
 }
 
