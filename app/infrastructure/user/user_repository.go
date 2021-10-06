@@ -17,8 +17,7 @@ type userRepository struct {
 }
 
 func NewUserRepository() UserRepository {
-	return &userRepository{
-	}
+	return &userRepository{}
 }
 
 // ユーザー作成

@@ -33,11 +33,10 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
-
 func executeQuery(query string, schema graphql.Schema) *graphql.Result {
 
 	// schemaとqueryで処理実行
-	result := graphql.Do(graphql.Params {
+	result := graphql.Do(graphql.Params{
 		Schema:        schema,
 		RequestString: query,
 	})

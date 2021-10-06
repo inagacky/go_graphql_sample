@@ -7,12 +7,14 @@ import (
 	"golang.org/x/oauth2"
 	"os"
 )
+
 var query struct {
 	Viewer struct {
 		Login     githubv4.String
 		CreatedAt githubv4.DateTime
 	}
 }
+
 func main() {
 
 	src := oauth2.StaticTokenSource(

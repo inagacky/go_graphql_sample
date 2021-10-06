@@ -24,7 +24,7 @@ func GetUserList(p graphql.ResolveParams) (interface{}, error) {
 }
 
 // ユーザー作成
-func CreateUser (params graphql.ResolveParams) (interface{}, error) {
+func CreateUser(params graphql.ResolveParams) (interface{}, error) {
 	firstName, _ := params.Args["firstName"].(string)
 	lastName, _ := params.Args["lastName"].(string)
 	email, _ := params.Args["email"].(string)

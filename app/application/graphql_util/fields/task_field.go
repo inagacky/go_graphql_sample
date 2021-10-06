@@ -6,27 +6,27 @@ import (
 	"github.com/inagacky/go_graphql_sample/app/presentation/resolver"
 )
 
-var TaskField = &graphql.Field {
+var TaskField = &graphql.Field{
 	Type:        types.TaskType,
 	Description: "Get single task",
-	Args: graphql.FieldConfigArgument {
-		"id": &graphql.ArgumentConfig {
+	Args: graphql.FieldConfigArgument{
+		"id": &graphql.ArgumentConfig{
 			Type: graphql.Int,
 		},
 	},
 	Resolve: resolver.GetTask,
 }
 
-var TaskListField = &graphql.Field {
+var TaskListField = &graphql.Field{
 	Type:        graphql.NewList(types.TaskType),
 	Description: "Task of tasks",
-	Resolve: resolver.GetTaskList,
+	Resolve:     resolver.GetTaskList,
 }
 
-var CreateTaskField = &graphql.Field {
+var CreateTaskField = &graphql.Field{
 	Type:        types.TaskType,
 	Description: "Create Task",
-	Args: graphql.FieldConfigArgument {
+	Args: graphql.FieldConfigArgument{
 		"userId": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.Int),
 		},

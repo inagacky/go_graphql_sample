@@ -5,10 +5,10 @@ import (
 )
 
 type Task struct {
-	Id            int `json:"id"`
-	UserId        int `json:"user_id"`
-	Title         string `json:"title"`
-	Content       string `json:"content"`
+	Id      int    `json:"id"`
+	UserId  int    `json:"user_id"`
+	Title   string `json:"title"`
+	Content string `json:"content"`
 }
 
 // constructor
@@ -29,8 +29,8 @@ func NewTask(
 	}
 
 	return &Task{
-		UserId: userId,
-		Title:  title,
+		UserId:  userId,
+		Title:   title,
 		Content: content,
 	}, nil
 }

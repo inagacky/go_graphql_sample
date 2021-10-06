@@ -17,8 +17,7 @@ type taskRepository struct {
 }
 
 func NewTaskRepository() TaskRepository {
-	return &taskRepository{
-	}
+	return &taskRepository{}
 }
 
 // タスク作成

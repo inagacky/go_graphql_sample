@@ -6,35 +6,35 @@ import (
 
 var UserType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "User",
-	Fields: graphql.Fields {
-		"id": &graphql.Field {
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
 			Type: graphql.String,
 		},
-		"firstName": &graphql.Field {
+		"firstName": &graphql.Field{
 			Type: graphql.String,
 		},
-		"lastName": &graphql.Field {
+		"lastName": &graphql.Field{
 			Type: graphql.String,
 		},
-		"email": &graphql.Field {
+		"email": &graphql.Field{
 			Type: graphql.String,
 		},
 	},
 })
 
-var UserInput = graphql.NewInputObject(graphql.InputObjectConfig {
+var UserInput = graphql.NewInputObject(graphql.InputObjectConfig{
 	Name: "user",
-	Fields: graphql.InputObjectConfigFieldMap {
-		"id": &graphql.InputObjectFieldConfig {
+	Fields: graphql.InputObjectConfigFieldMap{
+		"id": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
-		"firstName": &graphql.InputObjectFieldConfig {
+		"firstName": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
-		"lastName": &graphql.InputObjectFieldConfig {
+		"lastName": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
-		"email": &graphql.InputObjectFieldConfig {
+		"email": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
 	},
